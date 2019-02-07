@@ -3,8 +3,8 @@ import optionize from "../utils/utils";
 
 const defaultConfig = {
   fileName: 'export.csv',
+  raw: false,
   separator: ',',
-  wrapWithQuotes: true,
   withSeparator: true
 };
 
@@ -37,7 +37,7 @@ export default Service.extend({
       if (i > 0) {
         line += options.separator;
       }
-      line += options.wrapWithQuotes ? '"' + value.replace(/"/g, '""') + '"' : value.replace(/"/g, '""');
+      line += this.quoteValue(value, options.raw);
     }
 
     str += line + '\r\n';
@@ -63,19 +63,19 @@ export default Service.extend({
               resolveValue = value._d.toString();
             }
 
-            line += options.wrapWithQuotes ? '"' + resolveValue.replace(/"/g, '""') + '"' : resolveValue.replace(/"/g, '""');
+            line += this.quoteValue(resolveValue, options.raw);
           }
           else {
-            line += options.wrapWithQuotes ? '""' : '';
+            line += this.quoteValue('', options.raw);
           }
         }
         else {
           value = value + "";
           if (value && value !== 'undefined') {
-            line += options.wrapWithQuotes ? '"' + value.replace(/"/g, '""') + '"' : value.replace(/"/g, '""');
+            line += this.quoteValue(value, options.raw);
           }
           else {
-            line += options.wrapWithQuotes ? '""' : '';
+            line += this.quoteValue('', options.raw);
           }
         }
       }
@@ -83,5 +83,9 @@ export default Service.extend({
       str += line + '\r\n';
     }
     return str;
-  }
+  },
+
+  quoteValue(value, raw) {
+    return raw ? value : '"' + value.replace(/"/g, '""') + '"';
+  },
 });

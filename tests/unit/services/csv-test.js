@@ -21,13 +21,13 @@ module('Unit | Service | csv', function(hooks) {
     const options = {
       separator: ',',
       withSeparator: false,
-      wrapWithQuotes: true,
+      raw: false,
     };
 
     assert.deepEqual(service.jsonToCsv(array, options), expectedCSV);
   });
 
-  test('#jsonToCsv - with quote wrapping off, it should return a string in CSV format without quotes', function(assert) {
+  test('#jsonToCsv - with raw mode on, it should return a string in CSV format without quote wrapping', function(assert) {
     const service = this.owner.lookup('service:csv');
     const array = [
       [
@@ -43,7 +43,7 @@ module('Unit | Service | csv', function(hooks) {
     const options = {
       separator: ',',
       withSeparator: false,
-      wrapWithQuotes: false,
+      raw: true,
     };
 
     assert.deepEqual(service.jsonToCsv(array, options), expectedCSV);
