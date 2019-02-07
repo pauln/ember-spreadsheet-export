@@ -4,6 +4,7 @@ import optionize from "../utils/utils";
 const defaultConfig = {
   fileName: 'export.csv',
   separator: ',',
+  wrapWithQuotes: true,
   withSeparator: true
 };
 
@@ -36,7 +37,7 @@ export default Service.extend({
       if (i > 0) {
         line += options.separator;
       }
-      line += '"' + value.replace(/"/g, '""') + '"';
+      line += options.wrapWithQuotes ? '"' + value.replace(/"/g, '""') + '"' : value.replace(/"/g, '""');
     }
 
     str += line + '\r\n';
@@ -62,19 +63,19 @@ export default Service.extend({
               resolveValue = value._d.toString();
             }
 
-            line += '"' + resolveValue.replace(/"/g, '""') + '"';
+            line += options.wrapWithQuotes ? '"' + resolveValue.replace(/"/g, '""') + '"' : resolveValue.replace(/"/g, '""');
           }
           else {
-            line += '""';
+            line += options.wrapWithQuotes ? '""' : '';
           }
         }
         else {
           value = value + "";
           if (value && value !== 'undefined') {
-            line += '"' + value.replace(/"/g, '""') + '"';
+            line += options.wrapWithQuotes ? '"' + value.replace(/"/g, '""') + '"' : value.replace(/"/g, '""');
           }
           else {
-            line += '""';
+            line += options.wrapWithQuotes ? '""' : '';
           }
         }
       }
