@@ -15,7 +15,7 @@ export default Service.extend({
 
     let csv = this.jsonToCsv(data, options);
 
-    saveAs(new Blob([csv],{type:"data:text/csv;charset=utf-8"}), options.fileName);
+    saveAs(new Blob([csv], {type: "data:text/csv;charset=utf-8"}), options.fileName);
   },
 
   jsonToCsv(objArray, options) {
@@ -57,24 +57,20 @@ export default Service.extend({
             let resolveValue;
             if (value._d instanceof Date) {
               // dealing with encoding issue in IE browsers.
-              resolveValue = (value._d.getMonth() + 1) + '/' + value._d.getDate()  + '/' + value._d.getFullYear();
-            }
-            else {
+              resolveValue = value.format('YYYY-MM-DD HH:mm:ss')
+            } else {
               resolveValue = value._d.toString();
             }
 
             line += this.quoteValue(resolveValue, options.raw);
-          }
-          else {
+          } else {
             line += this.quoteValue('', options.raw);
           }
-        }
-        else {
+        } else {
           value = value + "";
           if (value && value !== 'undefined') {
             line += this.quoteValue(value, options.raw);
-          }
-          else {
+          } else {
             line += this.quoteValue('', options.raw);
           }
         }
