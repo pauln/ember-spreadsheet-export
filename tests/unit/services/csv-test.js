@@ -36,10 +36,51 @@ module('Unit | Service | csv', function (hooks) {
         'test_date',
       ],
       [
+        new Date(fakeDateWithTime)
+      ],
+    ];
+    const expectedCSV = '"test_date"\r\n"' + fakeDateWithTime + '"\r\n';
+    const options = {
+      separator: ',',
+      withSeparator: false,
+      raw: false,
+    };
+
+    assert.deepEqual(service.jsonToCsv(array, options), expectedCSV);
+  });
+
+  test('#jsonToCsv - it should provide time of day information with moment date fields', function (assert) {
+    const service = this.owner.lookup('service:csv');
+    const fakeDateWithTime = '2019-01-01 14:15:16';
+    const array = [
+      [
+        'test_date',
+      ],
+      [
         moment(fakeDateWithTime)
       ],
     ];
     const expectedCSV = '"test_date"\r\n"' + fakeDateWithTime + '"\r\n';
+    const options = {
+      separator: ',',
+      withSeparator: false,
+      raw: false,
+    };
+
+    assert.deepEqual(service.jsonToCsv(array, options), expectedCSV);
+  });
+
+  test('#jsonToCsv - it should provide string representations of any objects', function (assert) {
+    const service = this.owner.lookup('service:csv');
+    const array = [
+      [
+        'test_field',
+      ],
+      [
+        {"someKey": "someValue"}
+      ],
+    ];
+    const expectedCSV = '"test_field"\r\n"[object Object]"\r\n';
     const options = {
       separator: ',',
       withSeparator: false,

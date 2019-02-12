@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import optionize from "../utils/utils";
+import moment from 'moment';
 
 const defaultConfig = {
   fileName: 'export.csv',
@@ -54,14 +55,7 @@ export default Service.extend({
         }
         if (typeof value === 'object') {
           if (value) {
-            let resolveValue;
-            if (value._d instanceof Date) {
-              // dealing with encoding issue in IE browsers.
-              resolveValue = value.format('YYYY-MM-DD HH:mm:ss')
-            } else {
-              resolveValue = value._d.toString();
-            }
-
+            let resolveValue = this.getValueFromObject(value)
             line += this.quoteValue(resolveValue, options.raw);
           } else {
             line += this.quoteValue('', options.raw);
@@ -79,6 +73,21 @@ export default Service.extend({
       str += line + '\r\n';
     }
     return str;
+  },
+
+  getValueFromObject(value) {
+    let resolveValue;
+    if (value._d instanceof Date) {
+      // This is an improvised check for a momentjs object
+      resolveValue = value.format('YYYY-MM-DD HH:mm:ss')
+    } else {
+      if (value instanceof Date) {
+        resolveValue = moment(value).format('YYYY-MM-DD HH:mm:ss')
+      } else {
+        resolveValue = value.toString();
+      }
+    }
+    return resolveValue;
   },
 
   quoteValue(value, raw) {
