@@ -14,7 +14,10 @@ module.exports = {
   env: {
     browser: true
   },
-  rules: {
+  rules: {},
+  globals: {
+    'saveAs': 'writeable',
+    'XLSX': 'writeable',
   },
   overrides: [
     // node files
