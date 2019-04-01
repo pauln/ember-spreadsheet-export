@@ -6,7 +6,7 @@ var Funnel = require('broccoli-funnel');
 var map = require('broccoli-stew').map;
 
 module.exports = {
-  name: 'ember-cli-spreadsheet-export',
+  name: 'ember-spreadsheet-export',
 
 	treeForVendor(defaultTree) {
  		var browserVendorLib = new Funnel(path.join(this.project.root, 'vendor'), { files: ['Blob.js', 'FileSaver-1.3.3.js', 'jszip-0.10.8.js', 'xlsx-0.10.8.js'] } );
