@@ -1,10 +1,11 @@
 {
-  "name": "ember-spreadsheet-export",
-  "version": "0.4.0",
+  "name": "ember-cli-spreadsheet-export",
+  "version": "0.4.1",
   "contributors": [
-    "Paul Nicholls"
+    "Paul Nicholls",
+    "Eric Hubbell"
   ],
-  "description": "Provides ability to export a set of json data as excel or csv file.",
+  "description": "Export formatted json data as an excel or csv file. Fastboot-compliant.",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint .",
