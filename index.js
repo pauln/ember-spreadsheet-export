@@ -14,14 +14,34 @@ module.exports = {
     return new MergeTrees([defaultTree, browserVendorLib], { overwrite: true });
 	},
 
-  included(app) {
-  	this._super.included(app);
-    app.import('vendor/Blob.js');
-    app.import('vendor/FileSaver-1.3.3.js');
-		app.import('vendor/jszip-0.10.8.js');
+  included() {
+  	this._super.included.apply(this, arguments);
+    this._ensureThisImport();
+
+    this.import('vendor/Blob.js');
+    this.import('vendor/FileSaver-1.3.3.js');
+		this.import('vendor/jszip-0.10.8.js');
   },
 
-  isDevelopingAddon() {
-    return true;
+
+  _ensureThisImport: function() {
+    if (!this.import) {
+      this._findHost = function findHostShim() {
+        var current = this;
+        var app;
+        do {
+          app = current.app || app;
+        } while (current.parent.parent && (current = current.parent));
+        return app;
+      };
+      this.import = function importShim(asset, options) {
+        var app = this._findHost();
+        app.import(asset, options);
+      };
+    }
   }
+
+  // isDevelopingAddon() {
+  //   return true;
+  // }
 };
