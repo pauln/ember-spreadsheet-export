@@ -1,39 +1,27 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-const data = [
-  ['Column 1', 'Column 2', 'Column 3'],
-  ['foo', 'bar', 'baz'],
-  ['foobar', 'barbar', 'bazbar'],
-];
-const sheets = [
-  {
-    name: 'Demo',
-    data
-  },
-  {
-    name: 'Extra Sheet',
-    data: [
-      ['Foo', 'Bar'],
-      ['Baz', 'Foobar'],
-    ]
-  },
-]
-
 export default Controller.extend({
+  // Services
   csv: service(),
-  excel: service(),
 
+  
+  // Data
+  data: computed(function() {
+    return [
+      ['Column 1', 'Column 2', 'Column 3'],
+      ['foo', 'bar', 'baz'],
+      ['foobar', 'barbar', 'bazbar'],
+    ];
+  }),
+
+
+  // Actions
   actions: {
     downloadCSV() {
       this.csv.export(data, {fileName: 'demo.csv'});
     },
-    downloadXLSX() {
-      this.excel.export(data, {sheetName: 'demo', fileName: 'demo.xlsx'});
-    },
-    downloadMultiSheetXLSX() {
-      this.excel.export(sheets, {multiSheet: true, fileName: 'demo.xlsx'});
-    }
   }
 
 });

@@ -6,10 +6,10 @@ var Funnel = require('broccoli-funnel');
 var map = require('broccoli-stew').map;
 
 module.exports = {
-  name: 'ember-spreadsheet-export',
+  name: 'ember-cli-csv-export',
 
 	treeForVendor(defaultTree) {
- 		var browserVendorLib = new Funnel(path.join('./vendor'), { files: ['Blob.js', 'FileSaver-1.3.3.js', 'jszip-0.10.8.js', 'xlsx-0.10.8.js'] } );
+ 		var browserVendorLib = new Funnel(path.join('./vendor'), { files: ['Blob.js', 'jszip-0.10.8.js' ] });
     
     browserVendorLib = map(browserVendorLib, (content) => `if (typeof FastBoot === 'undefined') { ${content} }` );
     
