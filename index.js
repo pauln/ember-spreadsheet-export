@@ -1,8 +1,8 @@
 'use strict';
 
 var path = require('path');
-var MergeTrees = require('broccoli-merge-trees');
 var Funnel = require('broccoli-funnel');
+var MergeTrees = require('broccoli-merge-trees');
 var map = require('broccoli-stew').map;
 
 module.exports = {
