@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-csv",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "contributors": [
     "Paul Nicholls",
     "Eric Hubbell"
@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
-    "ember-cli-htmlbars": "^2.0.1",
+    "ember-cli-htmlbars": "^2.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

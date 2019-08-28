@@ -19,7 +19,7 @@ export default Controller.extend({
 
   // Actions
   actions: {
-    downloadCSV() {
+    downloadCSV(data) {
       this.csv.export(data, {fileName: 'demo.csv'});
     },
   }
