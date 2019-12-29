@@ -1,10 +1,11 @@
 {
-  "name": "ember-spreadsheet-export",
-  "version": "0.4.0",
+  "name": "ember-cli-csv",
+  "version": "0.0.3",
   "contributors": [
-    "Paul Nicholls"
+    "Paul Nicholls",
+    "Eric Hubbell"
   ],
-  "description": "Provides ability to export a set of json data as excel or csv file.",
+  "description": "Export formatted data to a csv file. Fastboot-compatible.",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint .",
@@ -21,6 +22,7 @@
     "ember-cli": "^3.5.1",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
+    "ember-cli-fastboot": "^2.0.4",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.4.0",
@@ -44,12 +46,12 @@
   "keywords": [
     "ember-addon",
     "ember-cli",
-    "xlsx",
-    "excel",
     "csv",
-    "spreadsheet"
+    "download",
+    "export",
+    "fastboot"
   ],
-  "repository": "https://github.com/pauln/ember-spreadsheet-export",
+  "repository": "https://github.com/ehubbell/ember-cli-csv",
   "license": "MIT",
   "author": "Matt Armstrong",
   "directories": {
@@ -58,8 +60,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
-    "ember-cli-htmlbars": "^2.0.1",
-    "xlsx": "^0.9.0"
+    "ember-cli-htmlbars": "^2.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
